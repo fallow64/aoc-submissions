@@ -22,3 +22,10 @@ Run `npm run dev` to start the development server. Open `localhost:3000` in your
 Run `npm run build` to build the application for production. The output will be in the `out` directory.
 
 To serve the built application, run `npm run start` and open `localhost:3000` in your browser.
+
+## TODO
+
+- [ ] Backend service that automatically caches / refetches submissions automatically
+- [ ] If a file contains part A and B, highlight the method of the selected part
+- [ ] UI improvements (more compact)
+- [ ] Reword title/description

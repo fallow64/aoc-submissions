@@ -81,8 +81,7 @@ export async function fetchAllCode(): Promise<CodeData[]> {
   }) => {
     try {
       const path = user.mapToPath(day, part);
-      const branch = user.branch ?? "main";
-      const url = `https://raw.githubusercontent.com/${user.username}/${user.repo}/${branch}/${path}`;
+      const url = `https://raw.githubusercontent.com/${user.username}/${user.repo}/${user.branch}/${path}`;
 
       const response = await fetch(url, {
         next: { revalidate: false },
