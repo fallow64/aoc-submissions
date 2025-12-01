@@ -25,7 +25,7 @@ export default function ButtonGroup({
           <button
             key={part}
             onClick={() => onSelectPart(part)}
-            className={`w-12 h-12 font-medium border border-border transition-colors ${
+            className={`w-12 h-12 font-medium border border-border transition-colors hover:cursor-pointer ${
               selectedPart === part
                 ? "bg-accent text-bg"
                 : "bg-card hover:bg-accent-hover hover:text-bg"
@@ -40,7 +40,7 @@ export default function ButtonGroup({
           <button
             key={day}
             onClick={() => onSelectDay(day)}
-            className={`w-12 h-12 font-medium border border-border transition-colors ${
+            className={`w-12 h-12 font-medium border border-border transition-colors hover:cursor-pointer ${
               selectedDay === day
                 ? "bg-accent text-bg"
                 : "bg-card hover:bg-accent-hover hover:text-bg"
