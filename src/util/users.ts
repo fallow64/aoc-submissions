@@ -1,11 +1,12 @@
 export type PartType = "A" | "B";
 
 export interface User {
+  /** GitHub username */
   username: string;
   nickname?: string;
   language: string;
   repo: string;
-  branch?: string;
+  branch: string;
   mapToPath(day: number, part: PartType): string;
 }
 
@@ -32,7 +33,6 @@ export const USERS: User[] = [
     language: "Python",
     repo: "aoc2025",
     branch: "main",
-    mapToPath: (day, part) =>
-      `pub/${day}/${part.toLowerCase()}.py`,
+    mapToPath: (day, part) => `pub/${day}/${part.toLowerCase()}.py`,
   },
 ];
