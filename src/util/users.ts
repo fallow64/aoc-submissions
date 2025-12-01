@@ -35,4 +35,13 @@ export const USERS: User[] = [
     mapToPath: (day, part) =>
       `pub/${day}/${part.toLowerCase()}.py`,
   },
+  {
+    username: "nicosalm",
+    nickname: "Nico",
+    language: "Python",
+    repo: "advent-of-code",
+    branch: "main",
+    mapToPath: (day, part) =>
+      `2025/day${day.toString().padStart(2, '0')}/${part === "A" ? "1" : "2"}.py`
+  }
 ];
