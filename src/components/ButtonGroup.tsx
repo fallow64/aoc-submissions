@@ -35,7 +35,7 @@ export default function ButtonGroup({
           </button>
         ))}
       </div>
-      <div className="flex gap-1">
+      <div className="flex flex-wrap gap-1">
         {days.map((day) => (
           <button
             key={day}

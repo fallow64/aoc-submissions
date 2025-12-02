@@ -30,6 +30,6 @@ To serve the built application, run `npm run start` and open `localhost:3000` in
 ## TODO
 
 - [ ] Backend service that automatically caches / refetches submissions automatically
-- [ ] If a file contains part A and B, highlight the method of the selected part
 - [ ] UI improvements (more compact)
 - [ ] Reword title/description
+- [ ] If a file contains part A and B, highlight the method of the selected part

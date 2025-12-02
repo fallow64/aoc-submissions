@@ -70,9 +70,9 @@ export default function HomeClient() {
 
   return (
     <div className="h-screen bg-bg p-4 pb-8 overflow-hidden">
-      <div className="grid grid-cols-[300px_1fr] gap-4 h-full">
+      <div className="flex flex-col md:flex-row gap-4 h-full">
         {/* Left: User List */}
-        <div className="bg-card p-4 border border-border">
+        <div className="bg-card p-4 border border-border overflow-y-auto md:w-80 md:shrink-0">
           <h2 className="text-lg font-semibold mb-4">Users</h2>
           <UserList
             users={USERS}
@@ -82,7 +82,7 @@ export default function HomeClient() {
         </div>
 
         {/* Right: Controls and Code Viewer */}
-        <div className="flex flex-col gap-4 h-full min-h-0">
+        <div className="flex flex-col gap-4 flex-1 min-h-0 min-w-0">
           <div className="bg-card p-4 border border-border shrink-0">
             <ButtonGroup
               selectedPart={selectedPart}
@@ -93,10 +93,9 @@ export default function HomeClient() {
           </div>
           <div className="bg-card flex-1 overflow-hidden">
             <CodeViewer
-              username={selectedUser.username}
+              user={selectedUser}
               part={selectedPart}
               day={selectedDay}
-              language={selectedUser.language}
               fetchSourceCode={fetchSourceCode}
             />
           </div>
