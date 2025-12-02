@@ -2,11 +2,15 @@ A simple website to compare [AdventOfCode](https://adventofcode.com/) solutions 
 
 Blatantly inspired by [CAU CS's submission comparison tool](https://github.com/melfkammholz/aoc-submissions).
 
+## Add Yourself!
+
+If you would like to add yourself to the site, please open a PR adding your information to [`src/util/users.ts`](https://github.com/fallow64/aoc-submissions/blob/main/src/util/users.ts).
+
 ## Setup
 
 1. Clone the repository with `git clone https://github.com/fallow64/aoc-submissions.git`
 2. Install dependencies with `npm install`
-3. Create a `.env` file in the root directory with the following content:
+3. Create a `.env` file in the root directory with the following content: (to avoid ratelimits)
    ```
    GITHUB_TOKEN=your_github_token_here
    ```

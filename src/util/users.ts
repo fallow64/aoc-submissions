@@ -17,7 +17,8 @@ export const USERS: User[] = [
     language: "Rust",
     repo: "aoc25",
     branch: "main",
-    mapToPath: (day, _part) => `src/day${day}.rs`,
+    mapToPath: (day, part) =>
+      `src/day${day}/part${part === "A" ? "1" : "2"}.rs`,
   },
   {
     username: "spaceybread",
@@ -42,6 +43,6 @@ export const USERS: User[] = [
     repo: "advent-of-code",
     branch: "main",
     mapToPath: (day, part) =>
-      `2025/day${day.toString().padStart(2, '0')}/${part === "A" ? "1" : "2"}.py`
-  }
+      `2025/day${day.toString().padStart(2, "0")}/${part === "A" ? "1" : "2"}.py`,
+  },
 ];
