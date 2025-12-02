@@ -7,6 +7,7 @@ export interface User {
   language: string;
   repo: string;
   branch: string;
+  /** Maps to the file path in the repository */
   mapToPath(day: number, part: PartType): string;
 }
 
