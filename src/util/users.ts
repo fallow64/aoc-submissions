@@ -21,14 +21,6 @@ export const USERS: User[] = [
       `src/day${day}/part${part === "A" ? "1" : "2"}.rs`,
   },
   {
-    username: "spaceybread",
-    language: "Python",
-    repo: "urban-winner",
-    branch: "main",
-    mapToPath: (day, part) =>
-      `2025/day${day}/part${part === "A" ? "1" : "2"}.py`,
-  },
-  {
     username: "AndrewDTR",
     nickname: "Andrew",
     language: "Python",
