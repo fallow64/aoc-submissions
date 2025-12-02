@@ -7,6 +7,7 @@ export interface User {
   language: string;
   repo: string;
   branch: string;
+  /** Maps to the file path in the repository */
   mapToPath(day: number, part: PartType): string;
 }
 
@@ -43,6 +44,7 @@ export const USERS: User[] = [
     language: "Go",
     repo: "adventofcode2025",
     branch: "main",
-    mapToPath: (day, part) => `day${day}/part${part === "A" ? "1" : "2"}/main.go`,
-  }
+    mapToPath: (day, part) =>
+      `day${day}/part${part === "A" ? "1" : "2"}/main.go`,
+  },
 ];
