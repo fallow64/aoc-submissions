@@ -6,13 +6,8 @@ import UserList from "@/components/UserList";
 import { PartType, User, USERS } from "@/util/users";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { CodeData } from "@/lib/fetchCode";
 
-interface HomeClientProps {
-  allCode: CodeData[];
-}
-
-export default function HomeClient({ allCode }: HomeClientProps) {
+export default function HomeClient() {
   const router = useRouter();
 
   // Initialize from URL params on client side only
@@ -53,18 +48,24 @@ export default function HomeClient({ allCode }: HomeClientProps) {
     }
   }, [selectedUser, selectedPart, selectedDay, router, isInitialized]);
 
-  // Fetch source code from GitHub on demand
+  // Fetch source code from API route
   const fetchSourceCode = useCallback(
     async (username: string, day: number, part: PartType): Promise<string> => {
-      const codeEntry = allCode.find(
-        (entry) =>
-          entry.username === username &&
-          entry.day === day &&
-          entry.part === part
-      );
-      return codeEntry ? codeEntry.code : "// Code not found.";
+      const params = new URLSearchParams({
+        username,
+        day: day.toString(),
+        part,
+      });
+
+      const response = await fetch(`/api/code?${params.toString()}`);
+      if (!response.ok) {
+        return `// Error: Failed to fetch code (${response.status})`;
+      }
+
+      const data = await response.json();
+      return data.code;
     },
-    [allCode]
+    []
   );
 
   return (
