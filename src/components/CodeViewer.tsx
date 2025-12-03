@@ -1,6 +1,7 @@
 "use client";
 
 import { PartType, User } from "@/util/users";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -61,6 +62,13 @@ export default function CodeViewer({
           className="text-xs px-3 py-1 bg-accent hover:bg-accent/80 text-bg rounded transition-colors"
         >
           Open in GitHub
+          <Image
+            src="/external-link-icon.svg"
+            alt="(opens in new tab)"
+            width={12}
+            height={12}
+            className="inline-block ml-1 mb-0.5"
+          />
         </a>
       </div>
       <div className="flex-1 overflow-auto">

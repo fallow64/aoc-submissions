@@ -16,7 +16,7 @@ export default function ButtonGroup({
   onSelectDay,
 }: ButtonGroupProps) {
   const parts: PartType[] = ["A", "B"];
-  const days = Array.from({ length: 12 }, (_, i) => i + 1);
+  const days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
     <div className="flex gap-4">

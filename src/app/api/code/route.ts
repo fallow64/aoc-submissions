@@ -1,7 +1,9 @@
-import { USERS } from "@/util/users";
+import { wrapComments } from "@/util/comment";
+import { PartType, USERS } from "@/util/users";
 import { NextRequest, NextResponse } from "next/server";
 
-export const revalidate = 900; // Cache for 15 minutes (900 seconds)
+export const CACHE_REVLIDATE = 15 * 60;
+export const CACHE_STALE_WHILE_REVALIDATE = 30 * 60;
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -31,12 +33,13 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const path = user.mapToPath(dayNum, part as "A" | "B");
+    const path = user.mapToPath(dayNum, part as PartType);
     const branch = user.branch || "main";
     const url = `https://raw.githubusercontent.com/${user.username}/${user.repo}/${branch}/${path}`;
 
     const response = await fetch(url, {
-      next: { revalidate: 900 }, // Cache GitHub response for 15 minutes
+      // ensure we cache response
+      next: { revalidate: CACHE_REVLIDATE },
     });
 
     if (!response.ok) {
@@ -45,11 +48,9 @@ export async function GET(request: NextRequest) {
         `URL: ${url}`,
         `Status: ${response.status}`,
       ];
-      const commentChar = user.language.toLowerCase() === "python" ? "#" : "//";
-      const errorCode = errorLines
-        .map((line) => `${commentChar} ${line}`)
-        .join("\n");
-      return NextResponse.json({ code: errorCode });
+      return NextResponse.json({
+        code: wrapComments(errorLines, user.language),
+      });
     }
 
     const code = await response.text();
@@ -57,16 +58,16 @@ export async function GET(request: NextRequest) {
       { code },
       {
         headers: {
-          "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800",
+          "Cache-Control": `public, s-maxage=${CACHE_REVLIDATE}, stale-while-revalidate=${CACHE_STALE_WHILE_REVALIDATE}`,
         },
       }
     );
   } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : "Unknown error";
-    const commentChar = user.language.toLowerCase() === "python" ? "#" : "//";
+    const errorLines = [
+      error instanceof Error ? error.message : "Unknown error",
+    ];
     return NextResponse.json({
-      code: `${commentChar} Error: ${errorMessage}`,
+      code: wrapComments(errorLines, user.language),
     });
   }
 }

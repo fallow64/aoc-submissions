@@ -14,7 +14,7 @@ export default function UserList({
   onSelectUser,
 }: UserListProps) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-0">
       {users.map((user) => (
         <button
           key={user.username}
