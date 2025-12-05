@@ -1,7 +1,6 @@
 export function wrapComments(lines: string[], language: string): string {
-  const commentStyle: Record<
-    string,
-    { start?: string; end?: string; line?: string }
+  const commentStyle: Partial<
+    Record<string, { start?: string; end?: string; line?: string }>
   > = {
     rust: { line: "//" },
     python: { line: "#" },
@@ -27,9 +26,9 @@ export function wrapComments(lines: string[], language: string): string {
     css: { start: "/*", end: "*/" },
   };
 
-  const style = commentStyle[language.toLowerCase()] || { line: "//" };
+  const style = commentStyle[language.toLowerCase()] ?? { line: "//" };
 
-  if (style.line) {
+  if (style.line !== undefined) {
     return lines.map((line) => `${style.line} ${line}`).join("\n");
   } else if (style.start && style.end) {
     return `${style.start}\n${lines.join("\n")}\n${style.end}`;

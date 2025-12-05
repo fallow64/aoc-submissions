@@ -1,6 +1,7 @@
 "use client";
 
 import { PartType } from "@/util/users";
+import { isDayAvailable } from "@/util/date";
 
 interface ButtonGroupProps {
   selectedPart: PartType;
@@ -36,19 +37,25 @@ export default function ButtonGroup({
         ))}
       </div>
       <div className="flex flex-wrap gap-1">
-        {days.map((day) => (
-          <button
-            key={day}
-            onClick={() => onSelectDay(day)}
-            className={`w-12 h-12 font-medium border border-border transition-colors hover:cursor-pointer ${
-              selectedDay === day
-                ? "bg-accent text-bg"
-                : "bg-card hover:bg-accent-hover hover:text-bg"
-            }`}
-          >
-            {day}
-          </button>
-        ))}
+        {days.map((day) => {
+          const available = isDayAvailable(day);
+          return (
+            <button
+              key={day}
+              onClick={() => available && onSelectDay(day)}
+              disabled={!available}
+              className={`w-12 h-12 font-medium border border-border transition-colors ${
+                !available
+                  ? "opacity-40 cursor-not-allowed bg-card text-muted"
+                  : selectedDay === day
+                    ? "bg-accent text-bg cursor-pointer"
+                    : "bg-card hover:bg-accent-hover hover:text-bg cursor-pointer"
+              }`}
+            >
+              {day}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
